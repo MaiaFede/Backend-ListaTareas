@@ -3,10 +3,7 @@ import {useState} from 'react';
 const ListaTareas = () => {
     const [tareas, setTareas] = useState([]);
     const [nuevaTarea, setNuevaTarea] = useState("");
-const tareaGuardada = (event)=> {
-    
-        setNuevaTarea(event.target.value);
-    }
+
       function añadirTarea() {
         const tareaNueva = {
           text: nuevaTarea,
@@ -34,7 +31,7 @@ const tareaGuardada = (event)=> {
         <div className="container-fluid align-center text-center ">
                     <h1>Bienvenido</h1>
                     <h4>Ingresa tus tareas</h4>
-                    <input type="text" value={nuevaTarea} onChange={tareaGuardada} />  
+                    <input type="text" value={nuevaTarea} onChange={(event)=>{setNuevaTarea(event.target.value)}} />  
                     <button onClick={añadirTarea} className="btn btn-primary rounded-4 ms-2">Agregar tarea</button>
                     <ul className="list-group">
         {tareas.map((tarea, index) => (
