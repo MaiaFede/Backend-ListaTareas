@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import Swal from "sweetalert2";
 import {borrarTarea, leerTareas} from "../helpers/queries"
 
-const ItemTarea = ({tarea, setTareas}) => {
+const ItemTarea = ({tarea, setTareas, setEditando}) => {
     const eliminarTarea= () =>{
         Swal.fire({
           title: "Estas seguro de eliminar la tarea?",
@@ -46,7 +46,7 @@ const ItemTarea = ({tarea, setTareas}) => {
                     <input type="checkbox" checked={tarea.completado} onChange={(e) => {e.target.value}} className="ms-5" />
                     <p className='mt-3 me-5 ms-2'> {tarea.nombreTarea} </p>
                     <div className="d-flex justify-content-between align-content-center">
-                    <Button variant="link"> <i className="bi bi-pencil-square col-6"></i></Button>
+                    <Button variant="link" onClick={()=>(setEditando(true))}> <i className="bi bi-pencil-square col-6"></i></Button>
                     <Button variant="danger"  onClick={eliminarTarea} className="col-6 ">Eliminar</Button>
                     </div>
                     </div>

@@ -49,3 +49,18 @@ export const crearTarea = async (tareaNueva) => {
     }
   };
   
+  export const editarTarea = async (tareaEditada, id) => {
+    try {
+      const respuesta = await fetch(APITareas+'/'+id,{
+        method: "PUT",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body: JSON.stringify(tareaEditada)
+      });
+      return respuesta;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
