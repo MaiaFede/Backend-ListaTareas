@@ -39,3 +39,13 @@ export const crearTarea = async (tareaNueva) => {
     }
   };
 
+  export const obtenerTarea = async (id) => {
+    try {
+      const respuesta = await fetch(APITareas+'/'+id);
+     console.info(respuesta)
+      return respuesta;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
