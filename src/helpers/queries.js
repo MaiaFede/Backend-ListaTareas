@@ -27,3 +27,15 @@ export const crearTarea = async (tareaNueva) => {
     }
   };
 
+  export const borrarTarea = async (id) => {
+    try {
+      const respuesta = await fetch(APITareas+'/'+id,{
+        method: "DELETE"     
+      });
+      console.info(respuesta);
+      return respuesta;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+

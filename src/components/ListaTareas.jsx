@@ -83,7 +83,7 @@ const ListaTareas = () => {
       </Form>
       <ul className="list-group">
         {tareas.map((tarea) => (
-          <ItemTarea key={tarea.id} tarea={tarea}></ItemTarea>
+          <ItemTarea key={tarea.id} tarea={tarea} setTareas={setTareas}></ItemTarea>
         ))}
                              
       </ul>
