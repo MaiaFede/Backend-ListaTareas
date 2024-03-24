@@ -3,10 +3,11 @@ import {Button, Modal, Container,Form} from 'react-bootstrap';
 import {obtenerTarea, editarTarea } from "../helpers/queries";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const ModalEditar = (props) => {
+  const { id } = props;
+  console.log({id})
   const {
     register,
     handleSubmit,
@@ -14,10 +15,8 @@ const ModalEditar = (props) => {
     reset, setValue
   } = useForm();
 
-  const {id} = useParams();
-
   useEffect(()=>{
-   cargarTareaEnFormulario();
+   cargarTareaEnFormulario(id);
   }, [])
 
   const datosValidados = async (tarea) => {
@@ -37,8 +36,9 @@ const ModalEditar = (props) => {
         });
       }
   }
-  const cargarTareaEnFormulario = async()=>{
+  const cargarTareaEnFormulario = async(id)=>{
     const respuesta = await obtenerTarea(id)
+    console.info(respuesta)
     if (respuesta.status === 200) {
       const tareaBuscada = await respuesta.json();
       setValue("nombreTarea", tareaBuscada.nombreTarea);

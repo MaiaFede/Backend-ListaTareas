@@ -1,8 +1,8 @@
 {
   "tareas": [
     {
-      "nombreTarea": "Hacer las compras del super",
-      "completado": false,
+      "nombreTarea": "Hacer las compras del almacen a las 8 P.M",
+      "completado": true,
       "id": "0e27"
     },
     {
