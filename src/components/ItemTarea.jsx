@@ -2,8 +2,11 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import Swal from "sweetalert2";
 import {borrarTarea, leerTareas} from "../helpers/queries"
+import {useState} from "react";
+import ModalEditar from './ModalEditar';
 
 const ItemTarea = ({tarea, setTareas}) => {
+  const [modalShow, setModalShow] = useState(false);
     const eliminarTarea= () =>{
         Swal.fire({
           title: "Estas seguro de eliminar la tarea?",
@@ -41,12 +44,17 @@ const ItemTarea = ({tarea, setTareas}) => {
         });
       }
     return (
-        <li key={tarea.id} className="list-unstyled mt-3 row ">
-                    <div className="conteiner-fluid border rounded-pill d-flex justify-content-start col-7 mx-4">
+        <li key={tarea.id} className="list-unstyled mt-3 align-content-center justify-content-center row ">
+                    <div className="conteiner-fluid border rounded-pill d-flex justify-content-between col-9 mx-5 ">
                     <input type="checkbox" checked={tarea.completado} onChange={(e) => {e.target.value}} className="ms-5" />
                     <p className='mt-3 me-5 ms-2'> {tarea.nombreTarea} </p>
+                    <div className="d-flex justify-content-between align-content-center">
+                    <Button variant="link" onClick={() => setModalShow(true)}> <i className="bi bi-pencil-square col-6"></i></Button>
+                    <Button variant="danger"  onClick={eliminarTarea} className="col-6 ">Eliminar</Button>
+                    <ModalEditar show={modalShow} onHide={() => setModalShow(false)} />
                     </div>
-     <Button variant="danger"  onClick={eliminarTarea} className="col-4">Eliminar</Button>
+                    </div>
+    
        </li>
     );
 };
