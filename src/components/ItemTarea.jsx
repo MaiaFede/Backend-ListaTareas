@@ -1,58 +1,104 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import { useState, useEffect } from "react";
+import { leerTareas, crearTarea,} from "../helpers/queries";
+import { Form, Button } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import ItemTarea from "./ItemTarea";
 import Swal from "sweetalert2";
-import {borrarTarea, leerTareas} from "../helpers/queries"
 
-const ItemTarea = ({tarea, setTareas, setEditando}) => {
-    const eliminarTarea= () =>{
-        Swal.fire({
-          title: "Estas seguro de eliminar la tarea?",
-          text: "No se puede revertir la operación!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Borrar",
-          cancelButtonText: "Cancelar"
-        }).then(async(result) => {
-          if (result.isConfirmed) {
-            const respuesta = await borrarTarea(tarea.id);
-            if(respuesta.status === 200){
-              Swal.fire({
-                title: "Receta eliminada",
-                text: `La receta ${tarea.nombreTarea} fue eliminada correctamente`,
-                icon: "success"
-              });
-    const respuestaTareasNuevas = await leerTareas();
-    console.log(respuestaTareasNuevas)
-    if(respuestaTareasNuevas.status === 200){
-      const NuevasTareas = await respuestaTareasNuevas.json();
-      setTareas(NuevasTareas)
+const ListaTareas = () => {
+  const [tareas, setTareas] = useState([]);
+ 
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm();
+
+  
+
+  useEffect(() => {
+    obtenerTareas();
+   
+  }, []);
+
+  const obtenerTareas = async () => {
+    const respuesta = await leerTareas();
+    if (respuesta.status === 200) {
+      const datos = await respuesta.json();
+      setTareas(datos);
+    } else {
     }
-    }else {
-              Swal.fire({
-                title:"Ocurrio un error",
-                text: `La receta ${tarea.nombreTarea} no fue eliminada, intente esta operacion en unos minutos. `,
-              icon: "error"
-              });
-            }
+  };
+
+  
+
+  const datosValidados = async (tarea) => {
+  
+  const tareaNueva = {
+    nombreTarea: tarea.nombreTarea,
+    completado: false,
+  };
+  const respuesta = await crearTarea(tareaNueva);
+  if (respuesta.status === 201) {
+    Swal.fire({
+      title: "Tarea creada",
+      text: `La tarea: ${tarea.nombreTarea}, fue creada correctamente`,
+      icon: "success",
+    });
+    reset();
+    obtenerTareas();
+  } else {
+    Swal.fire({
+      title: "Ocurrio un error",
+      text: `La tarea no pudo ser creada, intente esta operación en unos minutos`,
+      icon: "error",
+    });
+  }
+      };
+
+  return (
+    <div className="container-fluid align-center text-center ">
+                  <h1>Bienvenido</h1>            <h4>Ingresa tus tareas</h4>
+      <Form className="my-4" onSubmit={handleSubmit(datosValidados)}>
+        <Form.Group className="mb-3" controlId="formNombreTarea">
+          <Form.Control
+            type="text"
+            placeholder="Ej: Caminar en el parque"
+            {...register("nombreTarea", {
+              required: "El nombre de la tarea es un dato obligatorio",
+              minLength: {
+                value: 3,
+                message:
+                  "El nombre de la tarea debe tener como minimo 3 caracteres",
+              },
+              maxLength: {
+                value: 100,
+                message:
+                  "El nombre de la tarea debe tener como maximo 100 caracteres",
+              },
+            })}
+          />
+          <Form.Text className="text-danger">
+            {errors.nombreTarea?.message}
+          </Form.Text>
+          <Button type="submit" variant="primary" className="rounded-4 ms-2">
+          Agregar tarea
+          </Button>
+        </Form.Group>
            
-          }
-        });
-      }
-    return (
-        <li key={tarea.id} className="list-unstyled mt-3 align-content-center justify-content-center row ">
-                    <div className="conteiner-fluid border rounded-pill d-flex justify-content-between col-9 mx-5 ">
-                    <input type="checkbox" checked={tarea.completado} onChange={(e) => {e.target.value}} className="ms-5" />
-                    <p className='mt-3 me-5 ms-2'> {tarea.nombreTarea} </p>
-                    <div className="d-flex justify-content-between align-content-center">
-                    <Button variant="link" onClick={()=>(setEditando(true))}> <i className="bi bi-pencil-square col-6"></i></Button>
-                    <Button variant="danger"  onClick={eliminarTarea} className="col-6 ">Eliminar</Button>
-                    </div>
-                    </div>
-    
-       </li>
-    );
+      </Form>
+      <ul className="list-group">
+        {tareas.map((tarea) => (
+          <ItemTarea key={tarea.id} tarea={tarea} setTareas={setTareas} ></ItemTarea>
+        ))}
+                             
+      </ul>
+       
+    </div>
+  );
 };
 
-export default ItemTarea;
+export default ListaTareas;
