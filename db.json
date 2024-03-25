@@ -1,13 +1,8 @@
 {
   "tareas": [
     {
-      "nombreTarea": "Llamar a la abuela",
+      "nombreTarea": "Sacar a pasear las criaturas ",
       "completado": true,
-      "id": "0e27"
-    },
-    {
-      "nombreTarea": "Scar a pasear las mascotas",
-      "completado": false,
       "id": "3e21"
     },
     {
@@ -16,9 +11,14 @@
       "id": "58f1"
     },
     {
-      "nombreTarea": "juntada con mis amigas de hockey",
-      "completado": false,
-      "id": "7c65"
+      "id": "2e6a",
+      "nombreTarea": "Hacer las compras del almacen a las 8",
+      "completado": true
+    },
+    {
+      "id": "4143",
+      "nombreTarea": "Cantar en la plaza independencia",
+      "completado": false
     }
   ]
 }

@@ -54,8 +54,7 @@ const ItemTarea = ({tarea, setTareas,completar, obtenerTareas }) => {
                     <div className="d-flex justify-content-between align-content-center">
                     <Button variant="link" onClick={() => setModalShow(true)}> <i className="bi bi-pencil-square col-6"></i></Button>
                     <Button  variant="danger" onClick={eliminarTarea} className="col-6 btn-costum ">Eliminar</Button>
- 
-    <ModalEditar show={modalShow} onHide={() => setModalShow(false)} id={tarea.id}  obtenerTareas={obtenerTareas} />
+                    <ModalEditar show={modalShow} onHide={() => setModalShow(false)} id={tarea.id} setTareas={setTareas} />
                     </div>
                     </div>
     
