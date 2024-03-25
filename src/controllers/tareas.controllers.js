@@ -23,3 +23,17 @@ export const crearTarea = async(req, res)=>{
       })
     }  
   }
+
+  export const obtenerTarea = async(req, res) => {
+    try {
+ console.info(req.params.id)
+     const tareaBuscada = await Tarea.findById(req.params.id)
+     if (!tareaBuscada){
+        return res.status(404).json({mensaje:" El id enviado NO corresponde a ninguna de las tareas"})
+     }
+     res.status(200).json(tareaBuscada)
+    } catch (err) {
+     console.error(err);
+     res.status(400).json({mensaje:'Error al obtener las tareas'})
+    }   
+};
