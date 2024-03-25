@@ -79,6 +79,7 @@ const ListaTareas = () => {
 
   return (
     <div className="container-fluid align-center text-center ">
+      
       <h1>Bienvenido</h1> <h4>Ingresa tus tareas</h4>
       <Form className="my-4" onSubmit={handleSubmit(datosValidados)}>
         <Form.Group className="mb-3" controlId="formNombreTarea">

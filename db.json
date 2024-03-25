@@ -1,24 +1,19 @@
 {
   "tareas": [
     {
-      "nombreTarea": "Sacar a pasear las criaturas ",
-      "completado": true,
+      "nombreTarea": "Hacer las compras del super",
+      "completado": false,
+      "id": "0e27"
+    },
+    {
+      "nombreTarea": "sacar la basura",
+      "completado": false,
       "id": "3e21"
     },
     {
-      "nombreTarea": "correr a las 7A.M",
-      "completado": false,
-      "id": "58f1"
-    },
-    {
-      "id": "2e6a",
+      "id": "3aff",
       "nombreTarea": "Hacer las compras del almacen a las 8",
       "completado": true
-    },
-    {
-      "id": "4143",
-      "nombreTarea": "Cantar en la plaza independencia",
-      "completado": false
     }
   ]
 }

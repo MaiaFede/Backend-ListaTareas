@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import Swal from "sweetalert2";
-import {borrarTarea, leerTareas,obtenerTarea} from "../helpers/queries"
+import {borrarTarea, leerTareas} from "../helpers/queries"
 import {useState} from "react";
 import ModalEditar from './ModalEditar';
 
-const ItemTarea = ({tarea, setTareas,completar, obtenerTareas }) => {
+const ItemTarea = ({tarea, setTareas, completar}) => {
   const [modalShow, setModalShow] = useState(false);
   
     const eliminarTarea= () =>{
@@ -53,7 +53,7 @@ const ItemTarea = ({tarea, setTareas,completar, obtenerTareas }) => {
                     <p className='mt-3 me-5 ms-2'> {tarea.nombreTarea} </p>
                     <div className="d-flex justify-content-between align-content-center">
                     <Button variant="link" onClick={() => setModalShow(true)}> <i className="bi bi-pencil-square col-6"></i></Button>
-                    <Button  variant="danger" onClick={eliminarTarea} className="col-6 btn-costum ">Eliminar</Button>
+                    <Button  variant="danger" onClick={eliminarTarea} className="col-6 btn-costum me-5">Eliminar</Button>
                     <ModalEditar show={modalShow} onHide={() => setModalShow(false)} id={tarea.id} setTareas={setTareas} />
                     </div>
                     </div>
