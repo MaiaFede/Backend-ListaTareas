@@ -34,3 +34,6 @@ Conjunto de iconos SVG de Bootstrap.
 
 ### [SweetAlert2](https://sweetalert2.github.io/)
 Biblioteca para mostrar bonitos mensajes emergentes.
+
+## Autor: Maia Federica Gutierrez ❤️
+
