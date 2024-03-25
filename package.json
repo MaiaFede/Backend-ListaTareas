@@ -6,12 +6,16 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev":"node --watch index.js"
+    "dev": "node --watch index.js"
   },
   "keywords": [],
   "author": "Maia Federica Gutierrez",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.1",
+    "moongose": "^1.0.0",
+    "morgan": "^1.10.0"
   }
 }
