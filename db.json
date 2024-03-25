@@ -1,0 +1,19 @@
+{
+  "tareas": [
+    {
+      "nombreTarea": "Hacer las compras del super",
+      "completado": false,
+      "id": "0e27"
+    },
+    {
+      "nombreTarea": "sacar la basura",
+      "completado": false,
+      "id": "3e21"
+    },
+    {
+      "id": "3aff",
+      "nombreTarea": "Hacer las compras del almacen a las 8",
+      "completado": false
+    }
+  ]
+}
