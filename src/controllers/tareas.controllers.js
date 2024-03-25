@@ -1,4 +1,5 @@
 import Tarea from "../database/models/tarea.js";
+import {validationResult } from "express-validator"
 
 export const listarTareas = async(req, res) => {
     try {
@@ -12,6 +13,8 @@ export const listarTareas = async(req, res) => {
 
 export const crearTarea = async(req, res)=>{
     try {
+          const errors = validationResult(req)
+errors.isEmpty()
       const tareaNueva = new Tarea(req.body);
       await tareaNueva.save();
       console.info(req.body)
