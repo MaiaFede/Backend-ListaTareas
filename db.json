@@ -13,7 +13,7 @@
     {
       "id": "3aff",
       "nombreTarea": "Hacer las compras del almacen a las 8",
-      "completado": true
+      "completado": false
     }
   ]
 }

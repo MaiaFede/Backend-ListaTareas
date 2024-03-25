@@ -1,10 +1,36 @@
-# React + Vite
-Este proyecto te permite crear, eliminar y marcar como realizadas tareas o un conjunto de pedientes a hacer. Recomendado para tener una mejor organización.
+# Proyecto de Tareas 📝✨
+Este es un proyecto para gestionar tus tareas diarias. Recomendado para tener una mejor organización.
 
-## Demo
-- Repositorio de GitHub: https://github.com/MaiaFede/tpReact-ListaDeTareas.git
+## Funcionalidades 🔧
 
+El Proyecto de Tareas incluye las siguientes funcionalidades:
 
-## Librerias
+- **Crear Tarea**: Agrega nuevas tareas a tu lista.
+- **Editar Tarea**: Modifica el nombre o el estado de una tarea existente.
+- **Borrar Tarea**: Elimina una tarea de tu lista.
+- **Marcar como Hecha**: Cambia el estado de una tarea a completada.
 
--Bootstrap v5.3.2 
+## Dependencias 🛠️
+
+Este proyecto utiliza las siguientes bibliotecas:
+
+### [React](https://reactjs.org/)
+Librería de JavaScript para construir interfaces de usuario.
+
+### [React Bootstrap](https://react-bootstrap.github.io/)
+Componentes de Bootstrap adaptados para React.
+
+### [React Hook Form](https://react-hook-form.com/)
+Librería para trabajar con formularios en React.
+
+### [React Router DOM](https://reactrouter.com/web/guides/quick-start)
+Librería para manejar el enrutamiento en aplicaciones React.
+
+### [Bootstrap](https://getbootstrap.com/)
+Framework de CSS para diseño responsive.
+
+### [Bootstrap Icons](https://icons.getbootstrap.com/)
+Conjunto de iconos SVG de Bootstrap.
+
+### [SweetAlert2](https://sweetalert2.github.io/)
+Biblioteca para mostrar bonitos mensajes emergentes.
