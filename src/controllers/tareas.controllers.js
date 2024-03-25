@@ -50,6 +50,22 @@ export const editarTarea = async(req, res) => {
     res.status(200).json({mensaje:" La tarea fue editada correctamente"})
     } catch (err) {
      console.error(err);
-     res.status(500).json({mensaje:'Error al obtener las tareas'})
+     res.status(500).json({mensaje:'Error al editar las tareas'})
+    }
+   };
+
+   export const borrarTarea = async(req, res) => {
+    try {
+    
+     const tareaBuscada = await Tarea.findById(req.params.id)
+    
+     if (!tareaBuscada){
+        return res.status(404).json({mensaje:"El id enviado NO corresponde a ninguna de las tareas"})
+     }
+    await Tarea.findByIdAndDelete(req.params.id)
+    res.status(200).json({mensaje:" La tarea fue eliminada correctamente"})
+    } catch (err) {
+     console.error(err);
+     res.status(500).json({mensaje:'Error al borrar las tareas'})
     }
    };
