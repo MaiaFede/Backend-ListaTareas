@@ -1,0 +1,12 @@
+{
+  "name": "backend-listatareas",
+  "version": "1.0.0",
+  "description": "Backend de la lista de tareas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Maia Federica Gutierrez",
+  "license": "ISC"
+}
