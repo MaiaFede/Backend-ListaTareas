@@ -1,27 +1,27 @@
 import { useState, useEffect } from "react";
-import { leerTareas, crearTarea,} from "../helpers/queries";
+import { leerTareas, crearTarea,obtenerTarea,editarTarea} from "../helpers/queries";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
 import ItemTarea from "./ItemTarea";
 import Swal from "sweetalert2";
 
 const ListaTareas = () => {
   const [tareas, setTareas] = useState([]);
- 
+  const [completado, setCompletado] = useState(false);
+
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset, setValue
   } = useForm();
 
   
 
   useEffect(() => {
     obtenerTareas();
-   
+   completar();
   }, []);
 
   const obtenerTareas = async () => {
@@ -33,14 +33,31 @@ const ListaTareas = () => {
     }
   };
 
-  
+  const completar = async (id, completado) => {
+    const respuesta = await obtenerTarea(id);
+    if (respuesta.status === 200) {
+      const tarea = await respuesta.json();
+      const tareaActualizada = { ...tarea, completado }; // Actualiza el estado de completado
+      const respuestaEditar = await editarTarea(tareaActualizada, id);
+      if (respuestaEditar.status === 200) {
+        Swal.fire({
+          title: "Tarea actualizada",
+          text: completado ? `La tarea: ${tareaActualizada.nombreTarea}, ha sido marcada como completada` 
+                          : `La tarea: ${tareaActualizada.nombreTarea}, ha sido desmarcada`,
+          icon: "success"
+        });
+        obtenerTareas(); // Actualiza la lista de tareas
+      }
+    }
+  };
+ 
 
   const datosValidados = async (tarea) => {
-  
+    
   const tareaNueva = {
-    nombreTarea: tarea.nombreTarea,
-    completado: false,
-  };
+    nombreTarea : tarea.nombreTarea,
+    completado : completado,
+  }
   const respuesta = await crearTarea(tareaNueva);
   if (respuesta.status === 201) {
     Swal.fire({
@@ -58,6 +75,7 @@ const ListaTareas = () => {
     });
   }
       };
+   
 
   return (
     <div className="container-fluid align-center text-center ">
@@ -84,15 +102,16 @@ const ListaTareas = () => {
           <Form.Text className="text-danger">
             {errors.nombreTarea?.message}
           </Form.Text>
+          </Form.Group>
           <Button type="submit" variant="primary" className="rounded-4 ms-2">
           Agregar tarea
           </Button>
-        </Form.Group>
+       
            
       </Form>
       <ul className="list-group">
         {tareas.map((tarea) => (
-          <ItemTarea key={tarea.id} tarea={tarea} setTareas={setTareas} ></ItemTarea>
+          <ItemTarea key={tarea.id} tarea={tarea}  setTareas={setTareas} completar={completar} ></ItemTarea>
         ))}
                              
       </ul>

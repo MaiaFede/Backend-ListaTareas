@@ -6,28 +6,29 @@ import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
 const ModalEditar = (props) => {
-  const { id } = props;
-  console.log({id})
+  const { id} = props;
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset, setValue
+   setValue,
   } = useForm();
 
   useEffect(()=>{
    cargarTareaEnFormulario(id);
   }, [])
 
+  
   const datosValidados = async (tarea) => {
+    
   const respuesta = await editarTarea(tarea, id);
       if (respuesta.status === 200) {
         Swal.fire({
           title: "Receta editada",
           text: `La receta: ${tarea.nombreTarea}, fue editada correctamente`,
           icon: "success",
-        });
-        {props.onHide}
+        })
+        props.obtenerTareas()
       } else {
         Swal.fire({
           title: "Ocurrio un error",
@@ -43,6 +44,8 @@ const ModalEditar = (props) => {
       const tareaBuscada = await respuesta.json();
       setValue("nombreTarea", tareaBuscada.nombreTarea);
       setValue("completado", tareaBuscada.completado);
+      props.obtenerTareas();
+     props.onHide();
     }
   }
     return (
@@ -77,21 +80,9 @@ const ModalEditar = (props) => {
             {errors.nombreTarea?.message}
           </Form.Text>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formCompletado">
-          <Form.Control
-            type="checkbox"
-            {...register("completado", {
-              required: "Seleccionar si la tarea finalizo es un dato obligatorio",
-              
-            })}
-          />
-          <Form.Text className="text-danger">
-            {errors.completado?.message}
-          </Form.Text>
-          </Form.Group>
         <Modal.Footer>
-        <Button onClick={props.onHide} className="btn btn-danger">Cerrar</Button>
-        <Button  type="submit" variant="sucess">Guardar cambios</Button>
+        <Button onClick={props.onHide} variant="danger">Cerrar</Button>
+        <Button  type="submit" variant="success">Guardar cambios</Button>
         </Modal.Footer>
    
            
